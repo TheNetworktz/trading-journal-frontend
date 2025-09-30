@@ -13,7 +13,9 @@ function GroupPage() {
   useEffect(() => {
     if (!groupId) return;
 
-    const apiUrl = `https://trading-journal-backend-kem0.onrender.com`;
+    // --- THIS IS THE FIX ---
+    // The URL now correctly includes the full path to the API endpoint.
+    const apiUrl = `https://trading-journal-backend-kem0.onrender.com/api/groups/${groupId}`;
 
     fetch(apiUrl )
       .then(response => {
@@ -64,7 +66,6 @@ function GroupPage() {
             </tr>
           </thead>
           <tbody>
-            {/* Check if the leaderboard has any traders */}
             {groupData.trader_leaderboard.length > 0 ? (
               groupData.trader_leaderboard.map((trader, index) => (
                 <tr key={trader.id}>
@@ -81,7 +82,6 @@ function GroupPage() {
                 </tr>
               ))
             ) : (
-              // If no traders, display a message spanning all columns
               <tr>
                 <td colSpan="6" style={{ textAlign: 'center', fontStyle: 'italic', padding: '20px' }}>
                   This group has no traders with valid trade data.
