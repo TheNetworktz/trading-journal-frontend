@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// frontend/src/App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import GroupPage from './pages/GroupPage';
+import TraderPage from './pages/TraderPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <Navbar />
+        {/* Routes will render the FIRST path that matches the URL */}
+        <Routes>
+          {/* Path for the specific trader page. */}
+          <Route 
+            path="/groups/:groupId/traders/:traderId" 
+            element={<TraderPage />} 
+          />
+          
+          {/* Path for the group page. */}
+          <Route 
+            path="/groups/:groupId" 
+            element={<GroupPage />} 
+          />
+          
+          {/* Path for the homepage. This MUST be last. */}
+          <Route 
+            path="/" 
+            element={<HomePage />} 
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
